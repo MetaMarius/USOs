@@ -1,6 +1,6 @@
 # USO Generator
 
-## In this repository I work in code that will be able to generate "USO" sounds based on the Mitsubishi .wav files
+## In this repository I work on code that will be able to generate "USO" sounds based on the Mitsubishi .wav files
 
 ## It should be able to:
 
