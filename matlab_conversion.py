@@ -22,7 +22,6 @@ file_names.sort()
 
 sound_files = [slab.Binaural(file_names[randrange(0, len(file_names))]) for i in range(0, 6)]  # creating 6 slab objects
 
-
 output = slab.Binaural.silence(duration=1)                  # Is this step necessary? If yes, why?
 
 for sound_file in sound_files:
