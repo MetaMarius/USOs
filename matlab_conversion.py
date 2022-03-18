@@ -9,31 +9,32 @@ import copy
 
 slab.set_default_samplerate(48000)
 
-DIR = pathlib.Path(os.getcwd())
+DIR = pathlib.Path(os.getcwd())                             # getting the current working directory
 
-file_path = DIR / 'mitsubishi_wavs'
+file_path = DIR / 'mitsubishi_wavs'                         # setting absolute path
 
-file_names = [file_path / f for f in listdir(file_path)
+file_names = [file_path / f for f in listdir(file_path)     # creating list of all file names
                   if isfile(join(file_path, f))
                   and not f.startswith('.')
                   and f.endswith('.wav')]
 
 file_names.sort()
 
-sound_files = [slab.Binaural(file_names[randrange(0, len(file_names))]) for i in range(0, 6)]
+sound_files = [slab.Binaural(file_names[randrange(0, len(file_names))]) for i in range(0, 6)]  # creating 6 slab objects
 
-output = slab.Binaural.silence(duration=1)
+
+output = slab.Binaural.silence(duration=1)                  # Is this step necessary? If yes, why?
 
 for sound_file in sound_files:
-    snippet = copy.deepcopy(sound_file)
-    sound_length = len(sound_file)
-    min = int(0.02 * 48000)
-    max = int(0.2 * 48000)
-    snippet_length = random.randrange(min, max)
-    offset = random.randrange(0, sound_length - snippet_length)
-    snippet_length = slab.Signal.in_samples(snippet_length, sound_file.samplerate)
-    offset = slab.Signal.in_samples(offset, sound_file.samplerate)
-    snippet.data = sound_file.data[offset:offset + snippet_length]
-    output = slab.Binaural.sequence(output, snippet)
+    snippet = copy.deepcopy(sound_file)                     # defines one sound file after the other as snippet
+    sound_length = len(sound_file)                          # Defining variable to get length of the sound file
+    min = int(0.02 * 48000)                                 # Why this value?
+    max = int(0.2 * 48000)                                  # Why this value?
+    snippet_length = random.randrange(min, max)             # Defining variable to set a random snippet length, max 9600 min 960 samples
+    offset = random.randrange(0, sound_length - snippet_length)   # What exactly is meant by offset. What does it do and why these values?
+    snippet_length = slab.Signal.in_samples(snippet_length, sound_file.samplerate)   # Transforms snippet length from just an integer to an slab object, that slab can understand as a length in samples, right?
+    offset = slab.Signal.in_samples(offset, sound_file.samplerate)         # Same as above: defining offset as a length in samples in slab
+    snippet.data = sound_file.data[offset:offset + snippet_length]   # Can you explain what this line does?
+    output = slab.Binaural.sequence(output, snippet)                 # So in every stimulus there's also 1s of silence? If yes, why?
 
 output.play()
