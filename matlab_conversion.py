@@ -27,13 +27,15 @@ output = slab.Binaural.silence(duration=1)                  # Is this step neces
 for sound_file in sound_files:
     snippet = copy.deepcopy(sound_file)                     # defines one sound file after the other as snippet
     sound_length = len(sound_file)                          # Defining variable to get length of the sound file
-    min = int(0.02 * 48000)                                 # Why this value?
-    max = int(0.2 * 48000)                                  # Why this value?
+    min = int(0.02 * 48000)                                 # defining min snippet length
+    max = int(0.2 * 48000)                                  # defining max snippet length
     snippet_length = random.randrange(min, max)             # Defining variable to set a random snippet length, max 9600 min 960 samples
-    offset = random.randrange(0, sound_length - snippet_length)   # What exactly is meant by offset. What does it do and why these values?
-    snippet_length = slab.Signal.in_samples(snippet_length, sound_file.samplerate)   # Transforms snippet length from just an integer to an slab object, that slab can understand as a length in samples, right?
+    offset = random.randrange(0, sound_length - snippet_length)   # creating random starting point (=offset) for the snippet
+    snippet_length = slab.Signal.in_samples(snippet_length, sound_file.samplerate)   # Transforms snippet length from just an integer to an slab object, that slab can understand as a length in samples
     offset = slab.Signal.in_samples(offset, sound_file.samplerate)         # Same as above: defining offset as a length in samples in slab
-    snippet.data = sound_file.data[offset:offset + snippet_length]   # Can you explain what this line does?
-    output = slab.Binaural.sequence(output, snippet)                 # So in every stimulus there's also 1s of silence? If yes, why?
+    snippet.data = sound_file.data[offset:offset + snippet_length]   # creating the actual snippet by calling the .data object and intializing the length from offset to random snippet length
+    output = slab.Binaural.sequence(output, snippet)                 # 1 sample of silence in every stimulus
 
 output.play()
+
+output.write("uso_ran_snippets_40.wav")
