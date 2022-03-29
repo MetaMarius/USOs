@@ -38,4 +38,4 @@ for sound_file in sound_files:
 
 output.play()
 
-output.write("uso_ran_snippets_40.wav")
+
