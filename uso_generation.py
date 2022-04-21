@@ -13,10 +13,12 @@ def gen_stimulus():
             s.play()
             a = input('Take?')
         if a == "y":
-            s.write("uso_second_draft/" + "new_uso_" + input("File number:") + '.wav')
-            n = n + 1
+            s.write("uso_500ms/" + "new_uso_" + input("File number:") + '.wav')
+        elif a == "s":
+            break
         else:
-            n = n + 1
+            continue
+
     print("Finished")
 
 
@@ -38,8 +40,8 @@ def combine_sounds(length=24000, base=0, n_sounds=6):
     sout = slab.Sound('mitsubishi_wavs/' + bases[base] + '.wav')
     base_sr = sout.samplerate
     sout = sout.data[:, 0]
-    if base != 0:
-        sout = sout[np.where((sout > 0.03) == True)[0][0]:np.where((sout > 0.03) == True)[0][-1]][1000:25000]
+    # if base != 0:  # only needed if full length == 24000
+    sout = sout[np.where((sout > 0.03) == True)[0][0]:np.where((sout > 0.03) == True)[0][-1]][1000:25000]   # cutting bases 24000 samples long and taking only parts where it is louder than 0.03
 
     for i in range(n_sounds):
         f = random.choice(folders)
@@ -47,7 +49,7 @@ def combine_sounds(length=24000, base=0, n_sounds=6):
         s_sr = s.samplerate
         if base_sr != s_sr:
             print("Error: Samplerates don't match")
-        offset = math.ceil(np.random.random(1) * length - 4800)
+        offset = math.ceil(np.random.random(1) * length) # - 4800)
         if offset < 0:
             offset = 0
         s = np.append(np.zeros(offset), s)
@@ -57,3 +59,4 @@ def combine_sounds(length=24000, base=0, n_sounds=6):
     # sout.data = sout.data*0.5
     sout = sout / abs(sout).max()
     return slab.Sound(data=sout, samplerate=48000)
+
