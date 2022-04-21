@@ -18,7 +18,6 @@ def gen_stimulus():
             break
         else:
             continue
-
     print("Finished")
 
 
