@@ -59,4 +59,3 @@ def combine_sounds(length=24000, base=0, n_sounds=6):
     # sout.data = sout.data*0.5
     sout = sout / abs(sout).max()
     return slab.Sound(data=sout, samplerate=48000)
-
