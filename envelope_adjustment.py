@@ -19,5 +19,4 @@ uso_sounds = [sound_files[i].envelope(apply_envelope=env) for i in range(len(sou
 random.choice(uso_sounds).play()
 
 
-
 # slab.Sound("Rconst_Oconst.wav").waveform(start=0, end=48000)
