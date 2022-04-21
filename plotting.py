@@ -44,6 +44,3 @@ for index, sound_file in enumerate(sound_files[0:10]):
     slab.Binaural.spectrogram(sound_file.right, axis=ax[index], show=False)
 
 plt.show()
-
-
-
