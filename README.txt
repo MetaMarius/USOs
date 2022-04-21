@@ -1,10 +1,7 @@
 # USO Generator
 
-## In this repository I work on code that will be able to generate "USO" sounds based on the Mitsubishi .wav files
+This repository conntains code for generating "Unidentified Sound Objects" (USOs) by combining anechoic recordings from a data base of different real world sounds randomly. 
 
-## It should be able to:
+The code was created by converting the original matlab scripts into one python script, with some suitable adjustments implemented. 
 
-### read sound files in and play them back (still to be done)
-### combine them in different ways (still to be done)
-### analyze them for their frequency spectrum and, depending on that, categorize them (still to be done)
-### combine them depending on their frequency spectrum (still to be done)
+It also contains other python scripts, that can be used to alter the generated sounds. For detailed explanation see the according scripts. 
