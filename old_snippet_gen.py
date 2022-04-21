@@ -37,5 +37,3 @@ for sound_file in sound_files:
     output = slab.Binaural.sequence(output, snippet)                 # 1 sample of silence in every stimulus
 
 output.play()
-
-
