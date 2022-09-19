@@ -9,7 +9,7 @@ from tkinter import Tcl
 
 # Getting list of file names
 DIR = pathlib.Path(os.getcwd())
-file_path = DIR / "uso_1_room-30-30-10/simulated"
+file_path = DIR / "data"/"distance_simulation"/"300ms_normalised"/"N_uso_300ms_1_room-30-30-10"
 file_names = [file_path / f for f in listdir(file_path)]
 Tcl().call('lsort', '-dict', file_names)
 
